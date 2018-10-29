@@ -1,22 +1,23 @@
-function getAndPrintHTML (options) {
+function getHTML (options, callback) {
 
   /* Add your code here */
+  var input = process.argv.splice(2)[0];
   var https = require('https');
+  var str = '';
   https.get(options, function (response) {
     // set encoding of received data to UTF-8
     response.setEncoding('utf8');
-
-    // the callback is invoked when a `data` chunk is received
     response.on('data', function (data) {
-      //console.log('data', data);
-      console.log(data + '\n');
-    });
-  });
+      str += data + '\n';
+      return printHTML;
+    }
+  }
+
+function printHTML (html) {
+  console.log(html);
 }
 
 var requestOptions = {
   host: 'sytantris.github.io',
-  path: '/http-examples/step3.html'
+  path: '/http-examples/step4.html'
 };
-
-console.log(getAndPrintHTML (requestOptions));
